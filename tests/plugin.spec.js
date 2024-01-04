@@ -14,8 +14,8 @@ expect.extend({
   toMatchCss: cssMatcher,
 });
 
-describe("tailwindcss-language-variant", () => {
-  test("should generate tw variant with language config set to empty array", async () => {
+describe("tailwindcss-languages-config", () => {
+  test("When set to an empty array, default variable should be generated", async () => {
     config.theme.languages = [];
     const input = `
             .test {
@@ -34,8 +34,8 @@ describe("tailwindcss-language-variant", () => {
         `);
   });
 
-  test("should generate tw variant with language config set to array objects", async () => {
-    config.theme.languages = [{ tw: "tw" }, { en: "en" }];
+  test("When set to an empty object, default variable should be generated", async () => {
+    config.theme.languages = {};
     const input = `
             .test {
                 @apply tw:font-bold;
@@ -53,8 +53,7 @@ describe("tailwindcss-language-variant", () => {
         `);
   });
 
-  test("should generate tw variant with language config set as string", async () => {
-    config.theme.languages = "tw, en";
+  test("Default variable should be generated without language config", async () => {
     const input = `
             .test {
                 @apply tw:font-bold;
@@ -72,25 +71,7 @@ describe("tailwindcss-language-variant", () => {
         `);
   });
 
-  test("should generate tw variant without language config", async () => {
-    const input = `
-            .test {
-                @apply tw:font-bold;
-            }
-        `;
-
-    const result = await postcss(tailwindcss(config)).process(input, {
-      from: undefined,
-    });
-
-    expect(result.css).toMatchCss(`
-            [lang="tw"] .test {
-                font-weight: 700
-            }
-        `);
-  });
-
-  test("should generate tw and en variant with language config set to both", async () => {
+  test("The tw and en variables should be generated when both languages are set", async () => {
     config.theme.languages = ["tw", "en"];
     const input = `
             .test {
@@ -113,7 +94,7 @@ describe("tailwindcss-language-variant", () => {
         `);
   });
 
-  test("should generate default, tw and en variant with language config set to both", async () => {
+  test("The tw and en variables should be generated when both languages are set", async () => {
     config.theme.languages = ["tw", "en"];
     const input = `
             .test {
@@ -130,7 +111,32 @@ describe("tailwindcss-language-variant", () => {
                 font-weight: 500
             }
             [lang="tw"] .test {
-              font-weight: 600
+                font-weight: 600
+            }
+            [lang="en"] .test {
+                font-weight: 700
+            }
+        `);
+  });
+
+  test("When replacing prefix with object as language settings, taiwan and english variables should be generated", async () => {
+    config.theme.languages = { taiwan: "tw", english: "en" };
+    const input = `
+            .test {
+                @apply font-medium taiwan:font-semibold english:font-bold;
+            }
+        `;
+
+    const result = await postcss(tailwindcss(config)).process(input, {
+      from: undefined,
+    });
+
+    expect(result.css).toMatchCss(`
+            .test {
+                font-weight: 500
+            }
+            [lang="tw"] .test {
+                font-weight: 600
             }
             [lang="en"] .test {
                 font-weight: 700
