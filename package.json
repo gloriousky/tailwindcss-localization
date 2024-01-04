@@ -1,0 +1,33 @@
+{
+  "name": "@gloriousky/tailwindcss-localization",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [    
+    "tailwind",
+    "tailwindcss",    
+    "localization"
+  ],
+  "author": "gloriousky",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gloriousky/tailwindcss-localization/issues"
+  },
+  "engines": {
+    "node": ">=12",
+    "npm": ">=5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gloriousky/tailwindcss-localization.git"
+  },
+  "devDependencies": {
+    "jest": "29.7.0",
+    "jest-matcher-css": "1.1.0",
+    "postcss": "8.4.30",
+    "tailwindcss": "3.3.3"
+  }
+}
