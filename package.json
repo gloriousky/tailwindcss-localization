@@ -1,6 +1,6 @@
 {
   "name": "@gloriousky/tailwindcss-localization",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -8,8 +8,10 @@
   },
   "keywords": [    
     "tailwind",
-    "tailwindcss",    
-    "localization"
+    "tailwindcss",
+    "tailwind variables",
+    "localization",
+    "i18n"
   ],
   "author": "gloriousky",
   "license": "MIT",
@@ -28,6 +30,6 @@
     "jest": "29.7.0",
     "jest-matcher-css": "1.1.0",
     "postcss": "8.4.30",
-    "tailwindcss": "3.3.3"
+    "tailwindcss": "^3.3.0"
   }
 }

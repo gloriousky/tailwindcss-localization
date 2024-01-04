@@ -45,6 +45,46 @@ This plugin adds a new variant called `{language}` that can be used to style ele
    }
    ```
 
-   ## Changelog
+## Feature
 
-   - `1.0.0`: Initial release
+If you want a prefix that is different from the attribute value, specify the languages as an object:
+
+```js
+// tailwind.config.js
+module.exports = {
+  theme: {
+    languages: {
+      taiwan: "tw",
+      english: "en",
+    },
+  },
+  plugins: [require("@gloriousky/tailwindcss-localization")],
+};
+```
+
+```html
+<html lang="en">
+  <body>
+    <h1 class="english:text-lg">Hello, world!</h1>
+    <p class="taiwan:text-lg">Hello, world!</p>
+  </body>
+</html>
+```
+
+This will generate in the following CSS:
+
+```css
+[lang="en"] .english\:text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+[lang="tw"] .taiwan\:text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+```
+
+## Changelog
+
+- `1.1.0`: Feature - Use different prefixes
+- `1.0.0`: Initial release
